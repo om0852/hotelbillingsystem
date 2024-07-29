@@ -1,15 +1,20 @@
-import React from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/app/components/ui/card";
+"use client"
+import React, { useState } from "react";
 import Link from "next/link";
 
 const Page = () => {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+  const handleOnChange = (e: any) => {
+    //to set the data
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = () => {
+    //login to submit the form
+  };
   return (
     <div className="w-full h-[100vh] flex">
       <div className="w-[40%] bg-white">
@@ -44,17 +49,23 @@ const Page = () => {
             <div className="w-[15vh] h-[2px] bg-gray-800"></div>
           </div>
 
-          <form className="w-[70%] h-[40vh]">
+          <form onSubmit={handleSubmit} className="w-[70%] h-[40vh]">
             <div className="w-full my-4">
               <label>Email</label>
               <input
                 type="text"
+                onChange={handleOnChange}
+                name="email"
+                value={formData.email}
                 className="w-full h-10 px-2 border-gray-300 border-2 rounded-sm"
               />
             </div>
             <div className="w-full my-4">
               <label>Password</label>
               <input
+              onChange={handleOnChange}
+                name="password"
+                value={formData.password}
                 type="password"
                 className="w-full h-10 px-2  border-gray-300 border-2 rounded-sm"
               />
@@ -70,7 +81,12 @@ const Page = () => {
             </div>
 
             <div className="w-full my-4 ">
-              <button type="submit" className="w-full h-[7vh] rounded-sm bg-purple-600 text-white">Sign In</button>
+              <button
+                type="submit"
+                className="w-full h-[7vh] rounded-sm bg-purple-600 text-white"
+              >
+                Sign In
+              </button>
             </div>
           </form>
         </div>
